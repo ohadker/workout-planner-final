@@ -25,7 +25,7 @@ function render() {
     const li = document.createElement("li");
 
     const left = document.createElement("div");
-    left.innerHTML = `<strong>${log.exercise}</strong><div class="small">${log.date}</div>`;
+    left.innerHTML = `<strong>${log.exercise}</strong> <span class="small">(${log.plan})</span><div class="small">${log.date}</div>`;
 
     const right = document.createElement("div");
     const volume = log.weight * log.reps;
@@ -50,12 +50,14 @@ right.innerHTML = `${log.weight}kg x ${log.reps} (Volume: ${volume}) `;
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+const plan = document.getElementById("planSelect").value;
 
   const exercise = document.getElementById("exercise").value.trim();
   const weight = Number(document.getElementById("weight").value);
   const reps = Number(document.getElementById("reps").value);
 
   logs.push({
+    plan,
     exercise,
     weight,
     reps,
