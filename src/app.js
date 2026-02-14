@@ -110,6 +110,10 @@ function renderPlanSelect() {
     opt.value = plan;
     opt.textContent = plan;
     select.appendChild(opt);
+    renderPlanSelect();
+renderPlans();
+renderPlanSelect();
+
   });
 }
 
