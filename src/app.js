@@ -74,3 +74,29 @@ clearAllBtn.addEventListener("click", () => {
 });
 
 render();
+function savePlans() {
+  localStorage.setItem("workout_plans", JSON.stringify(plans));
+}
+
+function renderPlans() {
+  const list = document.getElementById("plansList");
+  list.innerHTML = "";
+
+  plans.forEach((plan, index) => {
+    const li = document.createElement("li");
+    li.textContent = plan;
+    list.appendChild(li);
+  });
+}
+
+function addPlan() {
+  const name = document.getElementById("planName").value.trim();
+  if (!name) return;
+
+  plans.push(name);
+  savePlans();
+  renderPlans();
+  document.getElementById("planName").value = "";
+}
+
+renderPlans();
