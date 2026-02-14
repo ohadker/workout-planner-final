@@ -27,7 +27,9 @@ function render() {
     left.innerHTML = `<strong>${log.exercise}</strong><div class="small">${log.date}</div>`;
 
     const right = document.createElement("div");
-    right.innerHTML = `${log.weight}kg x ${log.reps} `;
+    const volume = log.weight * log.reps;
+right.innerHTML = `${log.weight}kg x ${log.reps} (Volume: ${volume}) `;
+
 
     const delBtn = document.createElement("button");
     delBtn.textContent = "Delete";
