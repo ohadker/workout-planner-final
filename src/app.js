@@ -100,3 +100,16 @@ function addPlan() {
 }
 
 renderPlans();
+function renderPlanSelect() {
+  const select = document.getElementById("planSelect");
+  if (!select) return;
+
+  select.innerHTML = `<option value="">Select Plan</option>`;
+  plans.forEach(plan => {
+    const opt = document.createElement("option");
+    opt.value = plan;
+    opt.textContent = plan;
+    select.appendChild(opt);
+  });
+}
+
