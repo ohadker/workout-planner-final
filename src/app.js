@@ -3,6 +3,7 @@ const historyEl = document.getElementById("history");
 const clearAllBtn = document.getElementById("clearAll");
 
 let logs = JSON.parse(localStorage.getItem("workout_logs")) || [];
+let plans = JSON.parse(localStorage.getItem("workout_plans")) || [];
 
 function save() {
   localStorage.setItem("workout_logs", JSON.stringify(logs));
