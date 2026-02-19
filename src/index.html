@@ -3,38 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workout Tracker</title>
+  <title>Workout Planner & Tracker</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="container">
-    <h1>Workout Tracker</h1>
-<section class="card">
-  <h2>Create Workout Plan</h2>
-  <input id="planName" type="text" placeholder="Plan name (e.g. Push Day)" />
-  <button onclick="addPlan()">Create Plan</button>
-  <ul id="plansList"></ul>
-</section>
+    <h1>Workout Planner & Tracker</h1>
 
+    <!-- Create Plan -->
     <section class="card">
-      <h2>Add Log</h2>
-      <form id="logForm">
-        <select id="planSelect" required>
-  <option value="">Select Plan</option>
-</select>
-
-        <input id="exercise" type="text" placeholder="Exercise (e.g. Bench Press)" required />
-        <input id="weight" type="number" placeholder="Weight (kg)" min="0" step="0.5" required />
-        <input id="reps" type="number" placeholder="Reps" min="1" step="1" required />
-        <button type="submit">Add</button>
-      </form>
-      <p class="hint">Saved automatically in your browser (LocalStorage).</p>
+      <h2>Create Workout Plan</h2>
+      <input id="planName" type="text" placeholder="Plan name (e.g. Push Day)" />
+      <button onclick="addPlan()">Create Plan</button>
+      <ul id="plansList"></ul>
     </section>
 
+    <!-- Add Log -->
     <section class="card">
-      <h2>History</h2>
-      <ul id="history" class="history"></ul>
-      <button id="clearAll" class="danger">Clear All</button>
+      <h2>Add Workout Log</h2>
+      <form id="logForm">
+        <select id="planSelect" required>
+          <option value="">Select Plan</option>
+        </select>
+
+        <input id="exercise" type="text" placeholder="Exercise (e.g. Bench Press)" required />
+        <input id="weight" type="number" placeholder="Weight (kg)" required />
+        <input id="reps" type="number" placeholder="Reps" required />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <!-- History -->
+    <section class="card">
+      <h2>Workout History</h2>
+      <ul id="history"></ul>
     </section>
   </main>
 
