@@ -10,33 +10,38 @@
   <main class="container">
     <h1>Workout Planner & Tracker</h1>
 
-    <!-- Create Plan -->
     <section class="card">
       <h2>Create Workout Plan</h2>
-      <input id="planName" type="text" placeholder="Plan name (e.g. Push Day)" />
-      <button onclick="addPlan()">Create Plan</button>
-      <ul id="plansList"></ul>
+      <div class="row">
+        <input id="planName" type="text" placeholder="Plan name (e.g. Push Day)" />
+        <button id="createPlanBtn" type="button">Create Plan</button>
+      </div>
+      <ul id="plansList" class="list"></ul>
+      <p class="hint">Plans are saved in your browser (LocalStorage).</p>
     </section>
 
-    <!-- Add Log -->
     <section class="card">
       <h2>Add Workout Log</h2>
-      <form id="logForm">
+      <form id="logForm" class="row wrap">
         <select id="planSelect" required>
           <option value="">Select Plan</option>
         </select>
 
         <input id="exercise" type="text" placeholder="Exercise (e.g. Bench Press)" required />
-        <input id="weight" type="number" placeholder="Weight (kg)" required />
-        <input id="reps" type="number" placeholder="Reps" required />
+        <input id="weight" type="number" placeholder="Weight (kg)" min="0" step="0.5" required />
+        <input id="reps" type="number" placeholder="Reps" min="1" step="1" required />
+
         <button type="submit">Add</button>
       </form>
+      <p class="hint">Each log is linked to a plan. Volume is calculated automatically.</p>
     </section>
 
-    <!-- History -->
     <section class="card">
-      <h2>Workout History</h2>
-      <ul id="history"></ul>
+      <div class="row space-between">
+        <h2>Workout History</h2>
+        <button id="clearLogsBtn" type="button" class="danger">Clear All Logs</button>
+      </div>
+      <ul id="history" class="list"></ul>
     </section>
   </main>
 
