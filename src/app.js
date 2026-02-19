@@ -1,94 +1,12 @@
-const form = document.getElementById("logForm");
-const historyEl = document.getElementById("history");
-const clearAllBtn = document.getElementById("clearAll");
-
 let logs = JSON.parse(localStorage.getItem("workout_logs")) || [];
 let plans = JSON.parse(localStorage.getItem("workout_plans")) || [];
 
-function save() {
+function saveLogs() {
   localStorage.setItem("workout_logs", JSON.stringify(logs));
 }
 
-function render() {
-  historyEl.innerHTML = "";
-
-  if (logs.length === 0) {
-    const li = document.createElement("li");
-    li.textContent = "No logs yet. Add your first workout!";
-    historyEl.appendChild(li);
-    return;
-  }
-
-  logs.slice().reverse().forEach((log, indexFromEnd) => {
-    const realIndex = logs.length - 1 - indexFromEnd;
-
-    const li = document.createElement("li");
-
-    const left = document.createElement("div");
-    left.innerHTML = `<strong>${log.exercise}</strong> <span class="small">(${log.plan})</span><div class="small">${log.date}</div>`;
-
-    const right = document.createElement("div");
-    const volume = log.weight * log.reps;
-right.innerHTML = `${log.weight}kg x ${log.reps} (Volume: ${volume}) `;
-
-
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "Delete";
-    delBtn.onclick = () => {
-      logs.splice(realIndex, 1);
-      save();
-      render();
-    };
-
-    right.appendChild(delBtn);
-    li.appendChild(left);
-    li.appendChild(right);
-
-    historyEl.appendChild(li);
-  });
-}
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-const plan = document.getElementById("planSelect").value;
-
-  const exercise = document.getElementById("exercise").value.trim();
-  const weight = Number(document.getElementById("weight").value);
-  const reps = Number(document.getElementById("reps").value);
-
-  logs.push({
-    plan,
-    exercise,
-    weight,
-    reps,
-    date: new Date().toLocaleString()
-  });
-
-  save();
-  render();
-  form.reset();
-});
-
-clearAllBtn.addEventListener("click", () => {
-  logs = [];
-  save();
-  render();
-});
-
-render();
 function savePlans() {
   localStorage.setItem("workout_plans", JSON.stringify(plans));
-}
-
-function renderPlans() {
-  const list = document.getElementById("plansList");
-  list.innerHTML = "";
-
-  plans.forEach((plan, index) => {
-    const li = document.createElement("li");
-    li.textContent = plan;
-    list.appendChild(li);
-  });
 }
 
 function addPlan() {
@@ -101,21 +19,77 @@ function addPlan() {
   document.getElementById("planName").value = "";
 }
 
-renderPlans();
-function renderPlanSelect() {
+function renderPlans() {
+  const list = document.getElementById("plansList");
   const select = document.getElementById("planSelect");
-  if (!select) return;
 
+  list.innerHTML = "";
   select.innerHTML = `<option value="">Select Plan</option>`;
-  plans.forEach(plan => {
-    const opt = document.createElement("option");
-    opt.value = plan;
-    opt.textContent = plan;
-    select.appendChild(opt);
-    renderPlanSelect();
-renderPlans();
-renderPlanSelect();
 
+  plans.forEach(plan => {
+    const li = document.createElement("li");
+    li.textContent = plan;
+    list.appendChild(li);
+
+    const option = document.createElement("option");
+    option.value = plan;
+    option.textContent = plan;
+    select.appendChild(option);
   });
 }
 
+function renderLogs() {
+  const history = document.getElementById("history");
+  history.innerHTML = "";
+
+  logs.forEach((log, index) => {
+    const li = document.createElement("li");
+
+    const volume = log.weight * log.reps;
+
+    li.innerHTML = `
+      <strong>${log.exercise}</strong>
+      <span class="small">(${log.plan})</span><br>
+      ${log.weight}kg x ${log.reps} (Volume: ${volume})<br>
+      <span class="small">${log.date}</span>
+      <button onclick="deleteLog(${index})">Delete</button>
+    `;
+
+    history.appendChild(li);
+  });
+}
+
+function deleteLog(index) {
+  logs.splice(index, 1);
+  saveLogs();
+  renderLogs();
+}
+
+document.getElementById("logForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const plan = document.getElementById("planSelect").value;
+  const exercise = document.getElementById("exercise").value;
+  const weight = Number(document.getElementById("weight").value);
+  const reps = Number(document.getElementById("reps").value);
+
+  if (!plan) {
+    alert("Please select a workout plan");
+    return;
+  }
+
+  logs.push({
+    plan,
+    exercise,
+    weight,
+    reps,
+    date: new Date().toLocaleString()
+  });
+
+  saveLogs();
+  renderLogs();
+  this.reset();
+});
+
+renderPlans();
+renderLogs();
