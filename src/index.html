@@ -27,7 +27,6 @@
     <section class="grid">
       <!-- LEFT -->
       <div class="col">
-        <!-- Create Plan -->
         <section class="card">
           <h2>Create Plan</h2>
           <div class="row wrap">
@@ -37,7 +36,6 @@
           <div class="hint">Tip: create plans like Push / Pull / Legs.</div>
         </section>
 
-        <!-- Add Exercise to Plan -->
         <section class="card">
           <h2>Add Exercise to Plan</h2>
           <div class="row wrap">
@@ -50,7 +48,6 @@
           <div class="hint">Each plan has its own exercise list.</div>
         </section>
 
-        <!-- Plans list -->
         <section class="card">
           <div class="row space-between">
             <h2>Plans</h2>
@@ -65,7 +62,6 @@
 
       <!-- RIGHT -->
       <div class="col">
-        <!-- Add Log -->
         <section class="card">
           <h2>Add Workout Log</h2>
           <form id="logForm" class="row wrap">
@@ -87,7 +83,6 @@
           <div class="hint">Volume = weight × reps. Smart suggestion appears after you select an exercise.</div>
         </section>
 
-        <!-- Filters + Stats -->
         <section class="card">
           <div class="row space-between">
             <h2>Stats & Filters</h2>
@@ -126,7 +121,6 @@
           </div>
         </section>
 
-        <!-- Progress Chart -->
         <section class="card">
           <div class="row space-between">
             <h2>Progress Chart</h2>
@@ -139,11 +133,14 @@
             </div>
           </div>
 
-          <canvas id="progressChart" height="140"></canvas>
-          <div class="hint">Chart shows the selected exercise over time (newest to oldest).</div>
+          <!-- FIX: chart wrapper prevents infinite resize/scroll -->
+          <div class="chart-wrap">
+            <canvas id="progressChart"></canvas>
+          </div>
+
+          <div class="hint">Chart shows the selected exercise over time.</div>
         </section>
 
-        <!-- History -->
         <section class="card">
           <h2>Workout History</h2>
           <ul id="history" class="list"></ul>
