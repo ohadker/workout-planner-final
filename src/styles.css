@@ -1,8 +1,16 @@
-body { font-family: Arial; background:#f4f4f4; margin:0; }
-.container { max-width:700px; margin:20px auto; }
-.card { background:white; padding:15px; margin-bottom:15px; border-radius:10px; }
-input, select { padding:8px; margin-right:5px; }
-button { padding:8px 12px; cursor:pointer; }
-ul { list-style:none; padding:0; }
-li { margin-bottom:5px; }
-.small { font-size:12px; color:gray; }
+* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background:#f4f4f4; margin:0; }
+.container { max-width: 820px; margin: 20px auto; padding: 10px; }
+.card { background:#fff; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+h1 { margin-top: 0; }
+.row { display:flex; gap:10px; align-items:center; }
+.row.wrap { flex-wrap: wrap; }
+.row.space-between { justify-content: space-between; }
+input, select { padding: 10px; border: 1px solid #ddd; border-radius: 8px; min-width: 190px; }
+button { padding: 10px 14px; border: 0; border-radius: 8px; cursor: pointer; }
+button:hover { filter: brightness(0.95); }
+.list { list-style:none; padding:0; margin:10px 0 0 0; }
+.list li { display:flex; justify-content: space-between; gap:10px; padding:10px; border-bottom: 1px solid #eee; align-items: center; }
+.small { font-size: 12px; color:#666; }
+.hint { margin-top:10px; color:#666; font-size: 12px; }
+.danger { background:#ffe0e0; }
