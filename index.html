@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workout Planner & Tracker Pro</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div>
+        <h1>Workout Planner & Tracker Pro</h1>
+        <p class="muted">Plans → Exercises → Logs → Stats → Progress</p>
+      </div>
+
+      <div class="header-actions">
+        <button id="exportBtn" type="button">Export JSON</button>
+        <label class="file-btn">
+          Import JSON
+          <input id="importInput" type="file" accept="application/json" />
+        </label>
+        <button id="resetAllBtn" type="button" class="danger">Reset All</button>
+      </div>
+    </header>
+
+    <section class="grid">
+      <!-- LEFT -->
+      <div class="col">
+        <section class="card">
+          <h2>Create Plan</h2>
+          <div class="row wrap">
+            <input id="planName" type="text" placeholder="Plan name (e.g. Push Day)" />
+            <button id="createPlanBtn" type="button">Create</button>
+          </div>
+          <div class="hint">Tip: create plans like Push / Pull / Legs.</div>
+        </section>
+
+        <section class="card">
+          <h2>Add Exercise to Plan</h2>
+          <div class="row wrap">
+            <select id="planForExerciseSelect">
+              <option value="">Select Plan</option>
+            </select>
+            <input id="exerciseName" type="text" placeholder="Exercise name (e.g. Bench Press)" />
+            <button id="addExerciseBtn" type="button">Add Exercise</button>
+          </div>
+          <div class="hint">Each plan has its own exercise list.</div>
+        </section>
+
+        <section class="card">
+          <div class="row space-between">
+            <h2>Plans</h2>
+            <div class="row">
+              <button id="expandAllBtn" type="button">Expand All</button>
+              <button id="collapseAllBtn" type="button">Collapse All</button>
+            </div>
+          </div>
+          <div id="plansContainer" class="stack"></div>
+        </section>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col">
+        <section class="card">
+          <h2>Add Workout Log</h2>
+          <form id="logForm" class="row wrap">
+            <select id="planSelect" required>
+              <option value="">Select Plan</option>
+            </select>
+
+            <select id="exerciseSelect" required>
+              <option value="">Select Exercise</option>
+            </select>
+
+            <input id="weight" type="number" placeholder="Weight (kg)" min="0" step="0.5" required />
+            <input id="reps" type="number" placeholder="Reps" min="1" step="1" required />
+
+            <button type="submit">Add</button>
+          </form>
+
+          <div id="suggestBox" class="suggest"></div>
+          <div class="hint">Volume = weight × reps. Smart suggestion appears after you select an exercise.</div>
+        </section>
+
+        <section class="card">
+          <div class="row space-between">
+            <h2>Stats & Filters</h2>
+            <button id="clearLogsBtn" type="button" class="danger">Clear All Logs</button>
+          </div>
+
+          <div class="row wrap">
+            <input id="filterText" type="text" placeholder="Filter by exercise text (e.g. bench)" />
+            <select id="filterPlan">
+              <option value="">All Plans</option>
+            </select>
+            <select id="filterExercise">
+              <option value="">All Exercises</option>
+            </select>
+            <button id="applyFiltersBtn" type="button">Apply</button>
+            <button id="resetFiltersBtn" type="button">Reset Filters</button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="muted">Total Logs</div>
+              <div id="statTotalLogs" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+              <div class="muted">Total Volume</div>
+              <div id="statTotalVolume" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+              <div class="muted">Unique Exercises</div>
+              <div id="statUniqueExercises" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+              <div class="muted">Last Workout</div>
+              <div id="statLastWorkout" class="stat-value">—</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="row space-between">
+            <h2>Progress Chart</h2>
+            <div class="row">
+              <select id="chartMetric">
+                <option value="weight">Weight</option>
+                <option value="volume">Volume</option>
+              </select>
+              <button id="refreshChartBtn" type="button">Refresh</button>
+            </div>
+          </div>
+
+          <!-- FIX: chart wrapper prevents infinite resize/scroll -->
+          <div class="chart-wrap">
+            <canvas id="progressChart"></canvas>
+          </div>
+
+          <div class="hint">Chart shows the selected exercise over time.</div>
+        </section>
+
+        <section class="card">
+          <h2>Workout History</h2>
+          <ul id="history" class="list"></ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
